@@ -14,7 +14,7 @@ DOMAIN = 'api-ai.vivo.com.cn'
 METHOD = 'GET'
 
 
-def progress(task_id):
+def progress(task_id = None):
     params = {
         # 注意替换为提交作画任务时返回的task_id
         'task_id': task_id
@@ -27,13 +27,14 @@ def progress(task_id):
     uri_params = uri_params[:-1]
 
     url = 'http://{}{}?{}'.format(DOMAIN, URI, uri_params)
-    print('url:', url)
+    ## print('url:', url)
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        print(response.json())
-        return response.json()
+        # print(response.json())
+        return response.json(),response.json()['result']['finished']
     else:
-        print(response.status_code, response.text)
+        # print(response.status_code, response.text)
+        return None,False  # 这里一定注意需要返回值，否则会报错TypeError: cannot unpack non-iterable NoneType object
 
 
 if __name__ == '__main__':
