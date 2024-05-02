@@ -29,10 +29,11 @@ def submit(content):
    url = 'http://{}{}'.format(DOMAIN, URI)
    response = requests.post(url, data=json.dumps(data), headers=headers)
    if response.status_code == 200:
-       print(response.json())
+       # print(response.json())
        return response.json()['result']['task_id']
    else:
-       print(response.status_code, response.text)
+       # print(response.status_code, response.text)
+       return None
 
 
 if __name__ == '__main__':
