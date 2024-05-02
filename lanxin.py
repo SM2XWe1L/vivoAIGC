@@ -17,7 +17,7 @@ def sync_vivogpt(word):
     params = {
         'requestId': str(uuid.uuid4())
     }
-    print('requestId:', params['requestId'])
+    # print('requestId:', params['requestId'])
 
     data = {
         'prompt': word,
@@ -36,15 +36,15 @@ def sync_vivogpt(word):
 
     if response.status_code == 200:
         res_obj = response.json()
-        print(f'response:{res_obj}')
+        # print(f'response:{res_obj}')
         if res_obj['code'] == 0 and res_obj.get('data'):
             content = res_obj['data']['content']
-            print(f'final content:\n{content}')
+            print(content)
     else:
         print(response.status_code, response.text)
     end_time = time.time()
     timecost = end_time - start_time
-    print('请求耗时: %.2f秒' % timecost)
+    # print('请求耗时: %.2f秒' % timecost)
     return content
 
 
